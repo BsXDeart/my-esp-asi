@@ -1,11 +1,11 @@
 cmake_minimum_required(VERSION 3.15)
-project(ESPName ASI CXX)
+project(ESPName CXX)
 
 set(CMAKE_CXX_STANDARD 17)
 
-# บิวด์ main.cpp ออกมาเป็นไฟล์ .asi
+# สร้างไฟล์ผลลัพธ์เป็น .asi
 add_library(ESPName SHARED main.cpp)
 set_target_properties(ESPName PROPERTIES SUFFIX ".asi")
 
-# ลิงก์ไลบรารี psapi สำหรับ Windows API
+# ลิงก์ไลบรารี psapi ของ Windows
 target_link_libraries(ESPName PRIVATE psapi)
