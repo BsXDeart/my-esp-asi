@@ -7,18 +7,18 @@ on:
 jobs:
   build:
     runs-on: windows-latest
+
     steps:
     - uses: actions/checkout@v4
 
-    - name: Add MSBuild to PATH
-      uses: microsoft/setup-msbuild@v2
+    - name: Configure CMake
+      run: cmake -B build -A Win32
 
-    - name: Build Solution
-      run: |
-        cl.exe /LD /EHsc main.cpp /link psapi.lib /out:ESPName.asi
+    - name: Build Project
+      run: cmake --build build --config Release
 
     - name: Upload ASI
       uses: actions/upload-artifact@v4
       with:
         name: ESPName-ASI
-        path: ESPName.asi
+        path: build/Release/*.asi
